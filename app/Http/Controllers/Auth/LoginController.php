@@ -26,7 +26,21 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = 'admin.index';
+    protected $redirectTo = '/admin';
+
+    protected function redirectTo()
+    {
+        if(auth()->user()->usertype =='admin')
+        {
+            return 'admin';
+
+        }
+        else
+        {
+            return 'login';
+        }
+
+    }
 
     /**
      * Create a new controller instance.

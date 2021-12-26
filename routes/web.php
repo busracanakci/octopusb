@@ -6,11 +6,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::group(['namespace' => 'admin','prefix'=>'admin','as'=>'admin.'],function(){
+Route::group(['namespace' => 'admin','prefix'=>'admin','as'=>'admin.','middleware'=>['auth','AdminCtrl']],function(){
     Route::get('/','indexController@index')->name('index');
     Route::group(['namespace'=>'urunler','prefix'=>'urunler','as'=>'urunler.'],function(){
         Route::get('/','indexController@index')->name('index');

@@ -30,11 +30,24 @@
                 </div>
                 <div class="p-1 flex flex-row items-center">
                     <img onclick="profileToggle()" class="inline-block h-8 w-8 rounded-full" src="https://therichpost.com/wp-content/uploads/2021/03/avatar2.png" alt="">
-                    <a href="#" onclick="profileToggle()" class="text-white p-2 no-underline hidden md:block lg:block">ADMİN</a>
+                    <a href="#" onclick="profileToggle()" class="text-white p-2 no-underline hidden md:block lg:block">Kullanıcı : {{ Auth::user()->name }}</a>
                     <div id="ProfileDropDown" class="rounded hidden shadow-md bg-white absolute pin-t mt-12 mr-1 pin-r">
                         <ul class="list-reset">
                           <li><hr class="border-t mx-2 border-grey-ligght"></li>
-                          <li><a href="#" class="no-underline px-4 py-2 block text-black hover:bg-grey-light">Logout</a></li>
+                          
+                          <div class="alert alert-info success-block">
+                
+                        <a class="dropdown-menu-right" href="{{route('logout')}}"
+                            onclick="event.preventDefault();
+                            document.getElementById('logout-form').submit();">
+                            {{__('Logout')}}
+                            </a>
+
+                <form id="logout-form" action="{{route('logout')}}" method="POST" style="display:none;">
+                    {{ csrf_field() }}
+                </form>
+
+            </div>
                         </ul>
                     </div>
                 </div>

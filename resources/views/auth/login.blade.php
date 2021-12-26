@@ -1,45 +1,51 @@
-@extends('layouts.app')
+@extends('layouts.adminlogin')
 
 @section('content')
-<main class="sm:container sm:mx-auto sm:max-w-lg sm:mt-10">
-    <div class="flex">
-        <div class="w-full">
-            <section class="flex flex-col break-words bg-white sm:border-1 sm:rounded-md sm:shadow-sm sm:shadow-lg">
+<div class="h-screen font-sans login bg-cover">
+<div class="container mx-auto h-full flex flex-1 justify-center items-center">
+    <div class="w-full max-w-lg">
+      <div class="leading-loose">
+      <form class="form-horizontal" method="POST" action="{{ route('login') }}">
+                            {{ csrf_field() }}
 
-                <header class="font-semibold bg-gray-200 text-gray-700 py-5 px-6 sm:py-6 sm:px-8 sm:rounded-t-md">
-                    {{ __('Giriş Yap') }}
-                </header>
+                            <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                                <label for="email" class="col-md-4 control-label">E-Mail</label>
 
-                <form class="max-w-xl m-4 p-10 bg-white rounded shadow-xl" method="POST" action="{{ route('login') }}">
-                @csrf
-         
-          <div class="">
-            <label class="block text-sm text-gray-00" for="username">Adınız</label>
-            <input placeholder="Adınız" name="name" value="{{ old('name') }}" type="text" tabindex="3" required>
-                            @if ($errors->has('name'))
-                                <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('name') }}</strong>
-                                </span>
-                            @endif
-          </div>
-          <div class="">
-              <br>
-            <label class="block text-sm text-gray-00" for="password">Şifreniz</label>
-            <input placeholder="Şifreniz" name="password"  type="password" tabindex="4" required>
-                            @if ($errors->has('password'))
-                                <span class="invalid-feedback">
+                                <div class="col-md-6">
+                                    <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus>
+
+                                    @if ($errors->has('email'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('email') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                                <label for="password" class="col-md-4 control-label">Şifre</label>
+
+                                <div class="col-md-6">
+                                    <input id="password" type="password" class="form-control" name="password" required>
+
+                                    @if ($errors->has('password'))
+                                        <span class="help-block">
                                         <strong>{{ $errors->first('password') }}</strong>
-                                </span>
-                            @endif
-          </div>
-          <div class="mt-4 items-center justify-between">
-            <button class="px-4 py-1 text-white font-light tracking-wider bg-gray-900 rounded" type="submit" value="login">Giriş</button>
-           
-          </div>
-          
-        </form>
-            </section>
-        </div>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-8 col-md-offset-4">
+                                    <button type="submit" class="btn btn-primary">
+                                        Giriş
+                                    </button>
+                                </div>
+                            </div>
+                            
+                        </form>
+  
+      </div>
     </div>
-</main>
+</div></div>
 @endsection
